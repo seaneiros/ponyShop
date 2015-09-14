@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru" ng-app="PonyShop">
+<head>
+  <meta charset="UTF-8">
+  <title>Pony Store</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/angular.rangeSlider.css">
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="http://code.angularjs.org/1.1.5/angular.min.js"></script>
+  <script src="js/AppController.js"></script>
+  <script src="js/angular.rangeSlider.js"></script>
+</head>
+<body ng-controller="AppController">
+
+  <div class="filter__overlay" ng-show="filterVisible">
+    <div class="filter__content">
+      <div class="filter__close" ng-click="hideFilters()">[Закрыть]</div>
+
+      <select ng-model="filterValues.color"
+              ng-options="c as c for c in dictionary.colors"
+        >
+        <option value="">Выберите цвет пони</option>
+      </select>
+
+      <select ng-model="filterValues.kind"
+              ng-options="k as k for k in dictionary.kinds"
+        >
+        <option value="">Выберите вид пони</option>
+      </select>
+
+      <label>
+        Новинка
+        <input type="checkbox"
+               ng-model="filterValues.is_new"
+          >
+      </label>
+
+      <div range-slider
+           min="dictionary.priceLimits.min"
+           max="dictionary.priceLimits.max"
+           step="0.01"
+           decimal-places="2"
+           model-min="filterValues.priceMin"
+           model-max="filterValues.priceMax"
+           disabled="false"
+        ></div>
+
+    </div>
+  </div>
+
+  <a href="#" ng-click="showFilters()">Давайте подберем пони</a>
+
+  <ol class="pony_list">
+    <li class="pony_list__item"
+        ng-repeat="pony in ponyData | limitTo:20 | filter: selectPonies">
+      <table>
+        <tr>
+          <td>Имя:</td>
+          <td>{{pony.name}}</td>
+        </tr>
+        <tr>
+          <td>Цвет:</td>
+          <td>{{pony.color}}</td>
+        </tr>
+        <tr>
+          <td>Вид:</td>
+          <td>{{pony.kind}}</td>
+        </tr>
+        <tr>
+          <td>Цена:</td>
+          <td>{{pony.price}}</td>
+        </tr>
+        <tr ng-if="pony.is_new">
+          <td colspan="2">Новинка!</td>
+        </tr>
+      </table>
+    </li>
+  </ol>
+
+  <a href="#" ng-click="showFilters()">Эта ссылка тоже откроет фильтр!</a>
+
+</body>
+</html>
