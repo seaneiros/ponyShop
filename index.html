@@ -5,8 +5,8 @@
   <title>Pony Store</title>
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/angular.rangeSlider.css">
-  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script src="http://code.angularjs.org/1.1.5/angular.min.js"></script>
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <script src="js/angular.min.js"></script>
   <script src="js/AppController.js"></script>
   <script src="js/angular.rangeSlider.js"></script>
 </head>
@@ -24,6 +24,7 @@
 
       <select ng-model="filterValues.kind"
               ng-options="k as k for k in dictionary.kinds"
+              multiple="true"
         >
         <option value="">Выберите вид пони</option>
       </select>
